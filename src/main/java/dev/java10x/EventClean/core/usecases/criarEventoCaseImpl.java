@@ -1,4 +1,4 @@
 package dev.java10x.EventClean.core.usecases;
 
-public class criarEventoCaseImpl {
+public class criarEventoCaseImpl implements criarEventoCase {
 }

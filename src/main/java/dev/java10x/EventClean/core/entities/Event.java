@@ -1,9 +1,11 @@
 package dev.java10x.EventClean.core.entities;
 
-import java.util.Date;
+import dev.java10x.EventClean.core.enums.TipoEvento;
+
+import java.time.LocalDateTime;
 
 
-public record Event(String name, String descricao, Date inicio, Date fim, String identificador, String local, Integer capacidade, String tipo) {
+public record Event(Long id, String name, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String identificador, String local, Integer capacidade, TipoEvento tipo) {
 
 
 
