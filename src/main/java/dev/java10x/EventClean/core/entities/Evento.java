@@ -5,11 +5,15 @@ import dev.java10x.EventClean.core.enums.TipoEvento;
 import java.time.LocalDateTime;
 
 
-public record Evento(Long id, String name, String descricao, LocalDateTime dataInicio, LocalDateTime dataFim, String identificador, String local, Integer capacidade, TipoEvento tipo) {
-
-
-
-
-
-    // nome, descricao, inicio, fim, identificador, local, capacidade, tipo
-}
+public record Evento(
+        Long id,
+        String nome,
+        String descricao,
+        String identificador,
+        LocalDateTime dataInicio,
+        LocalDateTime dataFim,
+        String localEvento,
+        Integer capacidade,
+        String organizador,
+        TipoEvento tipo
+) {}
