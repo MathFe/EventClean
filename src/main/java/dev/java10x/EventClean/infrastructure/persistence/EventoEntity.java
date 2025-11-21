@@ -2,9 +2,7 @@ package dev.java10x.EventClean.infrastructure.persistence;
 
 import dev.java10x.EventClean.core.enums.TipoEvento;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
