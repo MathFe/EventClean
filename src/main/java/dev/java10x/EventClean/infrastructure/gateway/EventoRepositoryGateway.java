@@ -1,4 +1,6 @@
 package dev.java10x.EventClean.infrastructure.gateway;
 
-public class EventoGateway {
+import dev.java10x.EventClean.core.gateway.EventoGateway;
+
+public class EventoRepositoryGateway implements EventoGateway {
 }
