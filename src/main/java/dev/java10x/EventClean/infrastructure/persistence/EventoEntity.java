@@ -17,7 +17,7 @@ public class EventoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String nome;
     private String descricao;
     private String identificador;
     private LocalDateTime dataInicio;
@@ -25,5 +25,8 @@ public class EventoEntity {
     private String localEvento;
     private Integer capacidade;
     private String organizador;
-    private TipoEvento tipo;
+
+    @Column(name = "tipoevento")
+    @Enumerated(EnumType.STRING)
+    private TipoEvento tipoEvento;
 }

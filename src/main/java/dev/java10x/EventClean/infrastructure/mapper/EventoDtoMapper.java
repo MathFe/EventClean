@@ -11,7 +11,7 @@ public class EventoDtoMapper {
 
         return new Evento(
                 evento.id(),
-                evento.name(),
+                evento.nome(),
                 evento.descricao(),
                 evento.identificador(),
                 evento.dataInicio(),
@@ -19,7 +19,7 @@ public class EventoDtoMapper {
                 evento.localEvento(),
                 evento.capacidade(),
                 evento.organizador(),
-                evento.tipo()
+                evento.tipoEvento()
                 );
 
     }
@@ -35,7 +35,7 @@ public class EventoDtoMapper {
                 evento.localEvento(),
                 evento.capacidade(),
                 evento.organizador(),
-                evento.tipo()
+                evento.tipoEvento()
         );
     }
 }

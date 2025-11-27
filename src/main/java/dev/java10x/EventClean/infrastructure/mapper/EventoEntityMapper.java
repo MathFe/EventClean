@@ -17,7 +17,7 @@ public class EventoEntityMapper {
                 evento.localEvento(),
                 evento.capacidade(),
                 evento.organizador(),
-                evento.tipo()
+                evento.tipoEvento()
         );
     }
 
@@ -25,7 +25,7 @@ public class EventoEntityMapper {
 
         return new Evento(
                 eventoEntity.getId(),
-                eventoEntity.getName(),
+                eventoEntity.getNome(),
                 eventoEntity.getDescricao(),
                 eventoEntity.getIdentificador(),
                 eventoEntity.getDataInicio(),
@@ -33,7 +33,7 @@ public class EventoEntityMapper {
                 eventoEntity.getLocalEvento(),
                 eventoEntity.getCapacidade(),
                 eventoEntity.getOrganizador(),
-                eventoEntity.getTipo()
+                eventoEntity.getTipoEvento()
 
         );
 

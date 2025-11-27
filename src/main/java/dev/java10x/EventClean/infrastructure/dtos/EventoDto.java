@@ -8,7 +8,7 @@ public record EventoDto(
 
 
         Long id,
-        String name,
+        String nome,
         String descricao,
         String identificador,
         LocalDateTime dataInicio,
@@ -16,5 +16,5 @@ public record EventoDto(
         String localEvento,
         Integer capacidade,
         String organizador,
-        TipoEvento tipo
+        TipoEvento tipoEvento
 ) {}
