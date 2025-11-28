@@ -1,4 +1,20 @@
 package dev.java10x.EventClean.core.usecases;
 
-public class buscarEventoCaseImpl implements buscarEventoCase {
+import dev.java10x.EventClean.core.entities.Evento;
+import dev.java10x.EventClean.core.gateway.EventoGateway;
+
+import java.util.List;
+
+public class BuscarEventoCaseImpl implements BuscarEventoCase {
+
+    private final EventoGateway eventoGateway;
+
+    public BuscarEventoCaseImpl(EventoGateway eventoGateway) {
+        this.eventoGateway = eventoGateway;
+    }
+
+    @Override
+    public List<Evento> execute() {
+        return eventoGateway.buscarEventos();
+    }
 }

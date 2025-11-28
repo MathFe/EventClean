@@ -2,9 +2,12 @@ package dev.java10x.EventClean.core.gateway;
 
 import dev.java10x.EventClean.core.entities.Evento;
 
-public interface EventoGateway {
+import java.util.List;
 
+public interface EventoGateway {
 
     // Contrato
     Evento criarEvento(Evento evento);
+
+    List<Evento> buscarEventos();
 }
