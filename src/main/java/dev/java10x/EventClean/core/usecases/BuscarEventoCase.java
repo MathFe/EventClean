@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface BuscarEventoCase {
 
-    public List<Evento> execute();
+    List<Evento> execute();
 }
