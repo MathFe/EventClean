@@ -5,11 +5,14 @@ import dev.java10x.EventClean.core.gateway.EventoGateway;
 import dev.java10x.EventClean.infrastructure.mapper.EventoEntityMapper;
 import dev.java10x.EventClean.infrastructure.persistence.EventoEntity;
 import dev.java10x.EventClean.infrastructure.persistence.EventoRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Transactional
 @Component
 public class EventoRepositoryGateway implements EventoGateway {
 
@@ -23,9 +26,9 @@ public class EventoRepositoryGateway implements EventoGateway {
 
     @Override
     public Evento criarEvento(Evento evento) {
-        EventoEntity entity = mapper.toEntity(evento);
-        EventoEntity novoEvento = eventoRepository.save(entity);
-        return mapper.toDomain(novoEvento);
+            EventoEntity entity = mapper.toEntity(evento);
+            EventoEntity novoEvento = eventoRepository.save(entity);
+            return mapper.toDomain(novoEvento);
     }
 
     @Override
@@ -34,7 +37,11 @@ public class EventoRepositoryGateway implements EventoGateway {
         return buscarEventos.stream()
                 .map(mapper::toDomain)
                 .collect(Collectors.toList());
+    }
 
-
+    @Override
+    public boolean existePorIdentificador(String identificador) {
+        return eventoRepository.findAll().stream()
+                .anyMatch(evento -> evento.getIdentificador().equalsIgnoreCase(identificador));
     }
 }
