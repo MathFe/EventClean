@@ -8,6 +8,6 @@ public interface EventoGateway {
 
     // Contrato
     Evento criarEvento(Evento evento);
-
     List<Evento> buscarEventos();
+    boolean existePorIdentificador(String identificador);
 }
