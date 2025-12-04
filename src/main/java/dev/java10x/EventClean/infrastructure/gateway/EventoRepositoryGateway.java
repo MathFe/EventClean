@@ -2,10 +2,11 @@ package dev.java10x.EventClean.infrastructure.gateway;
 
 import dev.java10x.EventClean.core.entities.Evento;
 import dev.java10x.EventClean.core.gateway.EventoGateway;
+import dev.java10x.EventClean.infrastructure.dtos.EventoDto;
+import dev.java10x.EventClean.infrastructure.mapper.EventoDtoMapper;
 import dev.java10x.EventClean.infrastructure.mapper.EventoEntityMapper;
 import dev.java10x.EventClean.infrastructure.persistence.EventoEntity;
 import dev.java10x.EventClean.infrastructure.persistence.EventoRepository;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,5 +44,14 @@ public class EventoRepositoryGateway implements EventoGateway {
     public boolean existePorIdentificador(String identificador) {
         return eventoRepository.findAll().stream()
                 .anyMatch(evento -> evento.getIdentificador().equalsIgnoreCase(identificador));
+    }
+
+    @Override
+    public Evento filtroIdentificador(String identificador) {
+        EventoEntity entity = eventoRepository.findEventoByIdentificador(identificador);
+        if (entity == null) {
+            return null;
+        }
+        return mapper.toDomain(entity);
     }
 }

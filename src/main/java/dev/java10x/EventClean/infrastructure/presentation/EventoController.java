@@ -3,11 +3,12 @@ package dev.java10x.EventClean.infrastructure.presentation;
 import dev.java10x.EventClean.core.entities.Evento;
 import dev.java10x.EventClean.core.usecases.BuscarEventoCase;
 import dev.java10x.EventClean.core.usecases.CriarEventoCase;
+import dev.java10x.EventClean.core.usecases.FiltroIdentificadorCase;
 import dev.java10x.EventClean.infrastructure.dtos.EventoDto;
 import dev.java10x.EventClean.infrastructure.mapper.EventoDtoMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +22,14 @@ public class EventoController {
     private final CriarEventoCase criarEventoCase;
     private final EventoDtoMapper eventoDtoMapper;
     private final BuscarEventoCase buscarEventoCase;
+    private final FiltroIdentificadorCase filtroIdentificadorCase;
 
 
-    public EventoController(CriarEventoCase criarEventoCase, EventoDtoMapper eventoDtoMapper, BuscarEventoCase buscarEventoCase) {
+    public EventoController(CriarEventoCase criarEventoCase, EventoDtoMapper eventoDtoMapper, BuscarEventoCase buscarEventoCase, FiltroIdentificadorCase filtroIdentificadorCase) {
         this.criarEventoCase = criarEventoCase;
         this.eventoDtoMapper = eventoDtoMapper;
         this.buscarEventoCase = buscarEventoCase;
+        this.filtroIdentificadorCase = filtroIdentificadorCase;
     }
 
     @PostMapping("criarevento")
@@ -45,6 +48,19 @@ public class EventoController {
                 .map(eventoDtoMapper::toDto)
                 .collect(Collectors.toList());
         return eventosDto;
+    }
+
+    @GetMapping("{identificador}")
+    public ResponseEntity<?> filtroIdentificador(@PathVariable String identificador){
+        Evento evento = filtroIdentificadorCase.execute(identificador);
+
+        if(evento == null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Nenhum evento encontrado com esse identificador");
+        }
+
+        return ResponseEntity.ok(eventoDtoMapper.toDto(evento));
+
     }
 
 }
