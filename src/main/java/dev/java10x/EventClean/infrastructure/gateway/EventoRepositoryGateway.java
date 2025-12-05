@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Transactional
@@ -47,11 +48,7 @@ public class EventoRepositoryGateway implements EventoGateway {
     }
 
     @Override
-    public Evento filtroIdentificador(String identificador) {
-        EventoEntity entity = eventoRepository.findEventoByIdentificador(identificador);
-        if (entity == null) {
-            return null;
-        }
-        return mapper.toDomain(entity);
+    public Optional<Evento> filtroIdentificador(String identificador) {
+        return eventoRepository.findEventoByIdentificador(identificador);
     }
 }

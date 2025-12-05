@@ -2,6 +2,7 @@ package dev.java10x.EventClean.core.usecases;
 
 import dev.java10x.EventClean.core.entities.Evento;
 import dev.java10x.EventClean.core.gateway.EventoGateway;
+import dev.java10x.EventClean.infrastructure.exception.NotFoundEventException;
 
 public class FiltroIdentificadorCaseImpl implements FiltroIdentificadorCase{
 
@@ -13,6 +14,7 @@ public class FiltroIdentificadorCaseImpl implements FiltroIdentificadorCase{
 
     @Override
     public Evento execute(String identificador) {
-        return eventoGateway.filtroIdentificador(identificador);
+        return eventoGateway.filtroIdentificador(identificador)
+                .orElseThrow(() -> new NotFoundEventException("Evento com identificador: " + identificador + " não encontrado."));
     }
 }

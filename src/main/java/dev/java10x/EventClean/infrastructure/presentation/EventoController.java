@@ -6,7 +6,6 @@ import dev.java10x.EventClean.core.usecases.CriarEventoCase;
 import dev.java10x.EventClean.core.usecases.FiltroIdentificadorCase;
 import dev.java10x.EventClean.infrastructure.dtos.EventoDto;
 import dev.java10x.EventClean.infrastructure.mapper.EventoDtoMapper;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
@@ -51,15 +50,9 @@ public class EventoController {
     }
 
     @GetMapping("{identificador}")
-    public ResponseEntity<?> filtroIdentificador(@PathVariable String identificador){
+    public ResponseEntity<Evento> filtroIdentificador(@PathVariable String identificador){
         Evento evento = filtroIdentificadorCase.execute(identificador);
-
-        if(evento == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Nenhum evento encontrado com esse identificador");
-        }
-
-        return ResponseEntity.ok(eventoDtoMapper.toDto(evento));
+        return ResponseEntity.ok(evento);
 
     }
 
