@@ -17,4 +17,13 @@ public class ControllerExceptionsHandler {
         response.put("Mensagem: ","Por favor, insira uma hashId válida para o seu evento e tente novamente");
     return new ResponseEntity<>(response, HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(NotFoundEventException.class)
+    public ResponseEntity<Map<String, String>> handleNotFoundEventException(NotFoundEventException exception) {
+
+        Map<String, String> response = new HashMap<>();
+        response.put("Erro: ", exception.getMessage());
+        response.put("Mensagem: ", "Não foi encontrado nenhum evento com esse identificador." );
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
 }
