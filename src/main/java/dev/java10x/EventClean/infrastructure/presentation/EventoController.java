@@ -5,6 +5,7 @@ import dev.java10x.EventClean.core.usecases.BuscarEventoCase;
 import dev.java10x.EventClean.core.usecases.CriarEventoCase;
 import dev.java10x.EventClean.core.usecases.FiltroIdentificadorCase;
 import dev.java10x.EventClean.infrastructure.dtos.EventoDto;
+import dev.java10x.EventClean.infrastructure.dtos.EventoResponseDto;
 import dev.java10x.EventClean.infrastructure.mapper.EventoDtoMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,18 +37,18 @@ public class EventoController {
         Evento novoEvento = criarEventoCase.execute(eventoDtoMapper.toEntity(eventoDto));
         Map<String, Object> response = new HashMap<>();
         response.put("Mensagem: ","Evento cadastrado com sucesso no nosso banco de dados");
-        response.put("Dados do evento: ",eventoDtoMapper.toDto(novoEvento));
+        response.put("Dados do evento: ",eventoDtoMapper.toResponseDto(novoEvento));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("buscareventos")
-    public List<EventoDto> listarEvento() {
+    public List<EventoResponseDto> listarEvento() {
         List<Evento> eventos = buscarEventoCase.execute();
-        List<EventoDto> eventosDto = eventos.stream()
-                .map(eventoDtoMapper::toDto)
+        return eventos.stream()
+                .map(eventoDtoMapper::toResponseDto)
                 .collect(Collectors.toList());
-        return eventosDto;
     }
+
 
     @GetMapping("{identificador}")
     public ResponseEntity<Evento> filtroIdentificador(@PathVariable String identificador){

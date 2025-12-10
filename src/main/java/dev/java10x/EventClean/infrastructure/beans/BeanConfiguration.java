@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
 
     @Bean
-    public CriarEventoCase criarEventoCase(EventoGateway eventoGateway){
-        return new CriarEventoCaseImpl(eventoGateway);
+    public CriarEventoCase criarEventoCase(EventoGateway eventoGateway, RandomIdentificadorCase randomIdentificadorCase){
+        return new CriarEventoCaseImpl(eventoGateway, randomIdentificadorCase);
     }
 
     @Bean
@@ -22,5 +22,10 @@ public class BeanConfiguration {
     public FiltroIdentificadorCase filtroIdentificadorCase(EventoGateway eventoGateway){
         return new FiltroIdentificadorCaseImpl(eventoGateway);
 
+    }
+
+    @Bean
+    public RandomIdentificadorCase randomIdentificadorCase(EventoGateway eventoGateway){
+        return new RandomIdentificadorCaseImpl(eventoGateway);
     }
 }
